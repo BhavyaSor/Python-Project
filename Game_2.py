@@ -1,8 +1,8 @@
+
 # -*- coding: utf-8 -*-
 """
 Created on Mon Apr 13 18:32:23 2020
-
-@author: karti
+@author: kartik
 """
 
 
@@ -11,19 +11,20 @@ import pygame
 import time
 import random
 
+pygame.init()
+
 def play():
     
-    pygame.init()
-   
     display_width = 800
     display_height = 600
+    final_score=0
        
     background = pygame.image.load('pakku.png')
        
     black = (0,0,0)
    # white = (255,255,255)
     red = (255,0,0)
-    green=(0,255,0)
+    #green=(0,255,0)
     blue=(0,0,255)
     bright_red=(247,124,124)
     bright_blue = (162, 154, 227)
@@ -74,7 +75,7 @@ def play():
        
        
        
-    green=(0,255,0)
+    #green=(0,255,0)
     bright_green=(0,200,0)
        
     def checkexit(score):
@@ -84,7 +85,8 @@ def play():
             click = pygame.mouse.get_pressed()
             if(click[0]==1):    
                 exitt(score)
-           
+                return True
+        return False
        
     def button(msg,x,y,w,h,ic,ac):
         mouse = pygame.mouse.get_pos()
@@ -112,82 +114,87 @@ def play():
         text=font.render("Score : "+str(score),True,bright_red)
         gameDisplay.blit(text,(1,1))
        
-        
-    score=0
-    def game_loop():
-        x = (display_width * 0.45)
-        y = (display_height * 0.8)
-       
-        x_change = 0
-       
-        thing_startx = random.randrange(0, display_width)
-        thing_starty = -600
-        thing_speed = 7
-        thing_width = 100
-        thing_height = 100
-        passed=0
-       
-        newcol = (25, 5, 181)
-        choosecolor=[black,newcol,red,bright_green,blue]
-        ind=random.randint(0,4)
-       
-        gameExit = False
-       
-        while not gameExit:
-       
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                   # quit()
-       
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_LEFT:
-                        x_change = -7
-                    if event.key == pygame.K_RIGHT:
-                        x_change = 7
-       
-                if event.type == pygame.KEYUP:
-                    if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
-                        x_change = 0
-       
-            x += x_change
-            #gameDisplay.fill(bgcolor)
-            showbd()
-       
-            # things(thingx, thingy, thingw, thingh, color)
-            things(thing_startx, thing_starty, thing_width, thing_height, choosecolor[ind])
-            thing_starty += thing_speed
-            car(x,y)
-       
-            if x > display_width - car_width or x < 0:
-                crash(score)
-       
-            if thing_starty > display_height:
-                thing_starty = 0 - thing_height
-                thing_startx = random.randrange(20,display_width-thing_width-20)
-               
-                passed+=1
-                score+=1+int(passed/10)
-                thing_speed*=1.03
-                ind=random.randint(0,4)
-       
-            button("Quit",690,0,100,50,bright_red,red)
-            button("Score : "+str(score),10,0,100,50,bright_red,red)
-            button("",110,0,580,50,bright_blue,bright_blue)
-            button("",10,570,780,30,bright_blue,bright_blue)
-            checkexit(score)
+  
+    x = (display_width * 0.45)
+    y = (display_height * 0.8)
+   
+    x_change = 0
+   
+    thing_startx = random.randrange(0, display_width)
+    thing_starty = -600
+    thing_speed = 7
+    thing_width = 100
+    thing_height = 100
+    passed=0
+   
+    newcol = (25, 5, 181)
+    choosecolor=[black,newcol,red,bright_green,blue]
+    ind=random.randint(0,4)
+   
+    gameExit = False
+   
+    while not gameExit:
+   
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                #pygame.quit()
+                gameExit=True
+               # quit()
+   
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    x_change = -7
+                if event.key == pygame.K_RIGHT:
+                    x_change = 7
+   
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+                    x_change = 0
+   
+        x += x_change
+        #gameDisplay.fill(bgcolor)
+        showbd()
+   
+        # things(thingx, thingy, thingw, thingh, color)
+        things(thing_startx, thing_starty, thing_width, thing_height, choosecolor[ind])
+        thing_starty += thing_speed
+        car(x,y)
+   
+        if x > display_width - car_width or x < 0:
+            crash(final_score)
+   
+        if thing_starty > display_height:
+            thing_starty = 0 - thing_height
+            thing_startx = random.randrange(20,display_width-thing_width-20)
            
-           
-            if x > display_width - car_width or x < 0:
-                crash(score)
-           
-            if y < thing_starty+thing_height:
+            passed+=1
+            final_score+=1+int(passed/10)
+            thing_speed*=1.03
+            ind=random.randint(0,4)
+   
+        button("Quit",690,0,100,50,bright_red,red)
+        button("Score : "+str(final_score),10,0,100,50,bright_red,red)
+        button("",110,0,580,50,bright_blue,bright_blue)
+        button("",10,570,780,30,bright_blue,bright_blue)
+        HaYaNa = checkexit(final_score)
+        if HaYaNa==True:
+            break
        
-                if x > thing_startx and x < thing_startx + thing_width or x+car_width > thing_startx and x + car_width < thing_startx+thing_width:
-                    crash(score)
-            pygame.display.update()
-            clock.tick(60)
        
-    game_loop()
-    return score
-    
+        if x > display_width - car_width or x < 0:
+            crash(final_score)
+            break
+            
+       
+        if y < thing_starty+thing_height:
+   
+            if x > thing_startx and x < thing_startx + thing_width or x+car_width > thing_startx and x + car_width < thing_startx+thing_width:
+                crash(final_score)
+                break
+        pygame.display.update()
+        clock.tick(60)
+    pygame.quit()
+    return final_score
+
+#ans=play()
+#print(ans)
