@@ -57,11 +57,17 @@ def play():
     
     
     def game_over_text():
+        #print(5)
         over_text = over_font.render("GAME OVER", True, (255, 255, 255))
+        #print(6)
         screen.blit(over_text, (200, 250))
-        pygame.display.update()
-        time.sleep(3)
-        pygame.quit()
+        #print(7)
+        #pygame.display.update()
+        #print(8)
+        #time.sleep(3)
+        #print(9)
+        #pygame.quit()
+        #print(10)
     
     
     def player(x, y):
@@ -101,7 +107,7 @@ def play():
                 if event.key == pygame.K_RIGHT:
                     playerX_change = 5
                 if event.key == pygame.K_SPACE:
-                    if bullet_state is "ready":
+                    if bullet_state == "ready":
                         #print(bulletX)
                         bulletX = playerX
                         bullet_state = fire_bullet(bulletX, bulletY, bullet_state)
@@ -147,7 +153,7 @@ def play():
             bulletY = 480
             bullet_state = "ready"
     
-        if bullet_state is "fire":
+        if bullet_state == "fire":
             fire_bullet(bulletX, bulletY, bullet_state)
             bulletY -= bulletY_change
     
@@ -157,3 +163,10 @@ def play():
     pygame.quit()
     
     return score_value
+#print(4)
+#temp=play()
+#print(temp)
+#rint(temp)
+#print(temp)
+#print(temp)
+#print(11)
