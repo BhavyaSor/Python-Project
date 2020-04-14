@@ -57,7 +57,8 @@ def game2(window):
 
 def start_new_game():
     main_window.destroy()
-    usrname=get_usr()
+    while(name==""):
+        usrname=get_usr()
     game_window=Tk()
     game_window.title("Start New Game")
     photo2 = ImageTk.PhotoImage(file=str('GameWindow1.png'))
