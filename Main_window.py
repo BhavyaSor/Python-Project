@@ -3,7 +3,7 @@ from PIL import ImageTk,Image
 import pickle
 import Game_1 as g1
 import Game_2 as g2
-main_window = tkinter.Tk()  
+main_window = Tk()  
 main_window.geometry("400x600")
 main_window.title("Game Zone")
 
@@ -27,7 +27,7 @@ def load_score(name,score):
         pickle.dump(lst,fw)
 name=""
 def get_usr():
-    user_window=tkinter.Tk()
+    user_window=Tk()
     user_window.geometry("700x400")
     user_window.title("Congratulations")
     lab1=Label(user_window,text="Enter your Name : ",font=("Arial Bold",30))
@@ -60,7 +60,7 @@ def game2(window):
 def start_new_game():
     main_window.destroy()
     usrname=get_usr()
-    game_window=tkinter.Tk()
+    game_window=Tk()
     game_window.title("Start New Game")
     photo2 = ImageTk.PhotoImage(file=str('GameWindow1.png'))
     lab2=Label(game_window,image=photo2)
@@ -76,7 +76,7 @@ def start_new_game():
 
 def show_highscore():
     main_window.destroy()
-    highscore_window=tkinter.Tk()
+    highscore_window=Tk()
     highscore_window.geometry("500x650")
     highscore_window.title("High Scores")
     lst=get_list()
