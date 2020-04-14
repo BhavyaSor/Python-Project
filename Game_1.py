@@ -4,7 +4,7 @@ import time
 
 import pygame
 
-def player():
+def play():
 
     pygame.init()
     
@@ -157,6 +157,3 @@ def player():
     pygame.quit()
     
     return score_value
-
-temp = player()
-print(temp)
