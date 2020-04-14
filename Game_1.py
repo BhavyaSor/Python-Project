@@ -118,7 +118,7 @@ def play():
     
         for i in range(num_of_enemies):
     
-            if enemyY[i] > 300:
+            if enemyY[i] > 480:
                 for j in range(num_of_enemies):
                     enemyY[j] = 2000
                 game_over_text()
