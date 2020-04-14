@@ -22,8 +22,8 @@ def load_score(name,score):
     lst=list()
     with open("Scores.pickle","rb") as l:
         lst=pickle.load(l)
-    lst.append(tuple(score,name))
-    with open(str("Scores.pickle","wb")) as fw:
+    lst.append(tuple([score,name]))
+    with open("Scores.pickle","wb") as fw:
         pickle.dump(lst,fw)
 name=""
 def get_usr():
@@ -47,13 +47,11 @@ def game1(window):
     window.destroy()
     score=g1.play()
     load_score(name,score)
-    return
 
 def game2(window):
     window.destroy()
     score=g2.play()
     load_score(name,score)
-    return
 
 
 
@@ -90,13 +88,13 @@ def show_highscore():
         Label(highscore_window,text=str(lst[i][0]),font=("Araial",25)).grid(column=2,row=i+1,padx=(20,20),pady=(10,10))
     
     
-start_Button = Button(main_window,text="Start Game",font=("Arial Bold",30),command=start_new_game)
+start_Button = Button(main_window,text="Start Game",font=("Arial Bold",25),command=start_new_game)
 start_Button.pack(fill=X,padx=(100,100),pady=(10,30))
 
-highscore_Button = Button(main_window,text="High Scores",font=("Arial Bold",30),command=show_highscore)
+highscore_Button = Button(main_window,text="High Scores",font=("Arial Bold",25),command=show_highscore)
 highscore_Button.pack(fill=X,padx=(100,100),pady=(10,30))
 
-quit_Button = Button(main_window,text="End Game",font=("Arial Bold",30),command=main_window.destroy)
+quit_Button = Button(main_window,text="End Game",font=("Arial Bold",25),command=main_window.destroy)
 quit_Button.pack(fill=X,padx=(100,100),pady=(10,30))
 
 
